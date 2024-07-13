@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import dynamic from 'next/dynamic'
+import { useKeyboardNav } from '@/hooks/useKeyboardNav'
+import SEO from '@/components/SEO'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
@@ -13,30 +14,33 @@ import CookieConsent from '@/components/CookieConsent'
 import Modal from '@/components/Modal'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import ScrollProgressBar from '@/components/ScrollProgressBar'
+import Newsletter from '@/components/Newsletter'
+import ChatBot from '@/components/ChatBot'
 
 const DynamicTestimonials = dynamic(() => import('@/components/Testimonials'), { ssr: false })
 const DynamicFAQ = dynamic(() => import('@/components/FAQ'), { ssr: false })
 
+const navItems = [
+  { href: '#features', label: 'Features' },
+  { href: '#ai-engineer', label: 'AI Engineer' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#faq', label: 'FAQ' },
+]
+
 export default function Home() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+  useKeyboardNav(navItems)
 
   return (
     <ErrorBoundary>
       <ThemeProvider attribute="class">
+        <SEO 
+          title="Home"
+          description="Unlock human creativity with AI-powered software engineering"
+        />
         <div className="min-h-screen bg-background">
-          <Head>
-            <title>Lovable - Software that builds software</title>
-            <meta name="description" content="Unlock human creativity with AI-powered software engineering" />
-            <meta property="og:title" content="Lovable - Software that builds software" />
-            <meta property="og:description" content="Unlock human creativity with AI-powered software engineering" />
-            <meta property="og:image" content="/api/placeholder/1200/630" />
-            <meta property="og:type" content="website" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-
           <ScrollProgressBar />
-          <Header />
+          <Header navItems={navItems} />
 
           <main>
             <Hero />
@@ -45,6 +49,11 @@ export default function Home() {
             <DynamicTestimonials />
             <DynamicFAQ />
             <CallToAction onContactClick={() => setIsContactModalOpen(true)} />
+            <section className="py-12 bg-secondary">
+              <div className="container mx-auto px-4">
+                <Newsletter />
+              </div>
+            </section>
           </main>
 
           <footer className="py-8 text-center text-sm text-muted-foreground">
@@ -58,6 +67,7 @@ export default function Home() {
 
           <FloatingActionButton />
           <CookieConsent />
+          <ChatBot />
 
           <Modal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)}>
             <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
