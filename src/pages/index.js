@@ -19,6 +19,7 @@ import ChatBot from '@/components/ChatBot'
 import ThemeSwitcher from '@/components/ThemeSwitcher'
 import AnimatedSection from '@/components/AnimatedSection'
 import Analytics from '@/components/Analytics'
+import BackToTop from '@/components/BackToTop'
 
 const DynamicTestimonials = dynamic(() => import('@/components/Testimonials'), { ssr: false })
 const DynamicFAQ = dynamic(() => import('@/components/FAQ'), { ssr: false })
@@ -83,6 +84,7 @@ export default function Home() {
           </footer>
 
           <FloatingActionButton />
+          <BackToTop />
           <CookieConsent />
           <ChatBot />
           <ThemeSwitcher />
