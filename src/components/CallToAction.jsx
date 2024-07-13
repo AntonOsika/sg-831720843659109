@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 
 export default function CallToAction() {
@@ -23,15 +24,16 @@ export default function CallToAction() {
             Join the revolution in AI-powered software development. Unleash your creativity and bring your ideas to life.
           </motion.p>
           <motion.div 
-            className="mt-10 flex items-center justify-center gap-x-6"
+            className="mt-10 flex flex-col items-center justify-center gap-y-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Button size="lg" variant="secondary">Get started for free</Button>
-            <Button variant="outline" size="lg" className="text-white">
-              Learn more
-            </Button>
+            <div className="flex w-full max-w-md items-center space-x-2">
+              <Input type="email" placeholder="Enter your email" className="bg-white text-gray-900" />
+              <Button type="submit">Subscribe</Button>
+            </div>
           </motion.div>
         </div>
       </div>
