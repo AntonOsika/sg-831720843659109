@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
+import DarkModeToggle from './DarkModeToggle'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Header() {
@@ -28,10 +29,12 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           <a href="#features" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">Features</a>
-          <a href="#" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">About</a>
-          <a href="#" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">Contact</a>
+          <a href="#ai-engineer" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">AI Engineer</a>
+          <a href="#testimonials" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">Testimonials</a>
+          <a href="#faq" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">FAQ</a>
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+          <DarkModeToggle />
           <Button>Get Started</Button>
         </div>
       </nav>
@@ -46,10 +49,12 @@ export default function Header() {
           >
             <div className="space-y-1 px-2 pb-3 pt-2">
               <a href="#features" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Features</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">About</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Contact</a>
-              <div className="mt-4 px-3">
-                <Button className="w-full">Get Started</Button>
+              <a href="#ai-engineer" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">AI Engineer</a>
+              <a href="#testimonials" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Testimonials</a>
+              <a href="#faq" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">FAQ</a>
+              <div className="mt-4 flex items-center justify-between px-3">
+                <DarkModeToggle />
+                <Button>Get Started</Button>
               </div>
             </div>
           </motion.div>
