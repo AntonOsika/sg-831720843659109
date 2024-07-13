@@ -16,6 +16,9 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import ScrollProgressBar from '@/components/ScrollProgressBar'
 import Newsletter from '@/components/Newsletter'
 import ChatBot from '@/components/ChatBot'
+import ThemeSwitcher from '@/components/ThemeSwitcher'
+import AnimatedSection from '@/components/AnimatedSection'
+import Analytics from '@/components/Analytics'
 
 const DynamicTestimonials = dynamic(() => import('@/components/Testimonials'), { ssr: false })
 const DynamicFAQ = dynamic(() => import('@/components/FAQ'), { ssr: false })
@@ -43,17 +46,31 @@ export default function Home() {
           <Header navItems={navItems} />
 
           <main>
-            <Hero />
-            <AIEngineer />
-            <Features />
-            <DynamicTestimonials />
-            <DynamicFAQ />
-            <CallToAction onContactClick={() => setIsContactModalOpen(true)} />
-            <section className="py-12 bg-secondary">
-              <div className="container mx-auto px-4">
-                <Newsletter />
-              </div>
-            </section>
+            <AnimatedSection>
+              <Hero />
+            </AnimatedSection>
+            <AnimatedSection>
+              <AIEngineer />
+            </AnimatedSection>
+            <AnimatedSection>
+              <Features />
+            </AnimatedSection>
+            <AnimatedSection>
+              <DynamicTestimonials />
+            </AnimatedSection>
+            <AnimatedSection>
+              <DynamicFAQ />
+            </AnimatedSection>
+            <AnimatedSection>
+              <CallToAction onContactClick={() => setIsContactModalOpen(true)} />
+            </AnimatedSection>
+            <AnimatedSection>
+              <section className="py-12 bg-secondary">
+                <div className="container mx-auto px-4">
+                  <Newsletter />
+                </div>
+              </section>
+            </AnimatedSection>
           </main>
 
           <footer className="py-8 text-center text-sm text-muted-foreground">
@@ -68,12 +85,14 @@ export default function Home() {
           <FloatingActionButton />
           <CookieConsent />
           <ChatBot />
+          <ThemeSwitcher />
 
           <Modal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)}>
             <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
             <ContactForm />
           </Modal>
         </div>
+        <Analytics />
       </ThemeProvider>
     </ErrorBoundary>
   )

@@ -5,7 +5,7 @@ import Logo from './Logo'
 import DarkModeToggle from './DarkModeToggle'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function Header() {
+export default function Header({ navItems }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -18,8 +18,7 @@ export default function Header() {
           </a>
         </div>
         <div className="flex lg:hidden">
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            <span className="sr-only">Toggle menu</span>
+          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}>
             {mobileMenuOpen ? (
               <X className="h-6 w-6" aria-hidden="true" />
             ) : (
@@ -28,10 +27,16 @@ export default function Header() {
           </Button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#features" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">Features</a>
-          <a href="#ai-engineer" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">AI Engineer</a>
-          <a href="#testimonials" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">Testimonials</a>
-          <a href="#faq" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">FAQ</a>
+          {navItems.map((item, index) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+              aria-label={item.label}
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
           <DarkModeToggle />
@@ -48,10 +53,16 @@ export default function Header() {
             transition={{ duration: 0.3 }}
           >
             <div className="space-y-1 px-2 pb-3 pt-2">
-              <a href="#features" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Features</a>
-              <a href="#ai-engineer" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">AI Engineer</a>
-              <a href="#testimonials" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Testimonials</a>
-              <a href="#faq" className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground">FAQ</a>
+              {navItems.map((item, index) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground"
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </a>
+              ))}
               <div className="mt-4 flex items-center justify-between px-3">
                 <DarkModeToggle />
                 <Button>Get Started</Button>
