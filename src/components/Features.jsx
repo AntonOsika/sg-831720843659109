@@ -56,8 +56,10 @@ export default function Features() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Card>
+                <Card className="h-full">
                   <CardHeader>
                     <feature.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                     <CardTitle className="mt-4">{feature.name}</CardTitle>

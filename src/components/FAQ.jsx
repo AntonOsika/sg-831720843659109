@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
 
 const faqs = [
   {
@@ -29,6 +31,13 @@ const faqs = [
 ]
 
 export default function FAQ() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const filteredFaqs = faqs.filter(faq =>
+    faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <section className="py-24 sm:py-32" id="faq">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -42,14 +51,24 @@ export default function FAQ() {
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl">
+          <Input
+            type="text"
+            placeholder="Search FAQs..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="mb-8"
+          />
           <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
+            {filteredFaqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent>{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
+          {filteredFaqs.length === 0 && (
+            <p className="text-center text-muted-foreground mt-4">No matching questions found.</p>
+          )}
         </div>
       </div>
     </section>
