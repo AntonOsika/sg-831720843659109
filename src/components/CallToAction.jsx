@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 
-export default function CallToAction() {
+export default function CallToAction({ onContactClick }) {
   return (
     <div className="bg-primary py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -29,7 +29,7 @@ export default function CallToAction() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Button size="lg" variant="secondary">Get started for free</Button>
+            <Button size="lg" variant="secondary" onClick={onContactClick}>Contact Us</Button>
             <div className="flex w-full max-w-md items-center space-x-2">
               <Input type="email" placeholder="Enter your email" className="bg-white text-gray-900" />
               <Button type="submit">Subscribe</Button>
